@@ -11,7 +11,7 @@ import {
 } from "react-notifications";
 import NotificationUI from "../../../utils/Notification/NotificationUI";
 
-const StoreFromAdmin = ({ storeId, onClose, keyForm }) => {
+const StoreFromAdmin = ({ storeId, onClose, keyForm, onReload }) => {
   const [store, setStore] = useState({});
   const [notificationStatus, setNotificationStatus] = useState("");
   const [closeNotification, setCloseNotification] = useState(true);
@@ -54,7 +54,8 @@ const StoreFromAdmin = ({ storeId, onClose, keyForm }) => {
       const data = await updateCuaHangAdmin(dataUpdate);
       if (data) {
         NotificationManager.success("Thành công", "Duyệt cửa hàng");
-        window.location.reload();
+        onReload();
+        onClose();
       }
     } catch (error) {
       console.error(error);

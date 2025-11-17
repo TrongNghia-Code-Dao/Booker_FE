@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { getBookByDoanhThuAdmin } from '../../../utils/API/StoreAPI';
 import ListMoneyStore from '../ListData/ListMoneyStore';
 import { getRevenueAdmin } from '../../../utils/API/AdminAPI';
+import Breadcrumb from '../../../utils/Order/Breadcrumb';
 
 const MoneyStore = () => {
 
@@ -30,8 +31,12 @@ const MoneyStore = () => {
     }, [])
 
     return (
-        <div className="page scroll-container">
-            <div className="container">
+        <div className="page">
+            <div className="pageHead">
+        <h3>Doanh thu</h3>
+        <Breadcrumb paths={["Doanh thu", "Doanh thu cửa hàng"]} />
+      </div>
+      <div className="containerProduct">
                 {
                     isLoading ? (
                         <>

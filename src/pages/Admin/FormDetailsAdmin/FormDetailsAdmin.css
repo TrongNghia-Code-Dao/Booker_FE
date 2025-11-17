@@ -6,8 +6,6 @@
 .customer-form-heigth{
     width: 900px !important;
     height: 435px !important;
-    margin-top: 140px !important;
-    margin-left: 45% !important;
 }
 .customer-form-header{
     padding-bottom: 7px !important;
@@ -15,10 +13,10 @@
 .customer-form-img{
     width: 30%;
     height: 247px;
-    margin-right: 20px;
+    margin-left: 15px;
 }
 .customer-form-img img{
-    width: 100%;
+    width: 97%;
     height: 100%;
     border-radius: 50%;
     border: 1px solid #ccc;
@@ -238,13 +236,11 @@
 
 }
 .qrcode-form{
-    margin-top: 70px !important;
     width: 770px;
     height: 570px;  
     position: relative;
     display: flex;
     justify-content: space-between;
-    margin-left: 42%;
 }
 .qrcode-form-store{
     width: 40%;
@@ -403,10 +399,12 @@
 }
 .baocao_text{
     font-size: 1.8rem;
-    margin-top: 12px;
+    margin-top: 25px;
 }
 .baocao_text label{
     color: gray;
+    font-weight: 600;
+    font-family: 'OpenSans', sans-serif;
 }
 .baocao_text textarea{
     display: block !important;
@@ -414,6 +412,7 @@
     height: auto;
     margin-top: 7px;
     font-family: 'Mali', sans-serif;
+    color: black;
 }
 .baocao_button{
     margin-top: 20px;

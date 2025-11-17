@@ -21,6 +21,8 @@ const ListOrder = ({
   title,
   keyForm,
   trangThaiBtn,
+  setButton,
+  onReload
 }) => {
   const [orderDetails, setOrderDetails] = useState([]);
   const [pagination, setPagination] = useState();
@@ -39,6 +41,7 @@ const ListOrder = ({
 
   // ** Ẩn hiện form chi tiết đơn hàng
   const handleShowDetailOrder = (orderId) => {
+    // alert('mã đơn hàng chi tieety là: ', orderId)
     setSelectedOrder(orderId);
     setIsDetailOrder(true);
   };
@@ -72,7 +75,7 @@ const ListOrder = ({
       className="box-shadow_row"
       onClick={() => handleShowDetailOrder(order.ma_don_hang_chi_tiet)}
     >
-      <td>
+      <td style={{ width: "40px", textAlign: "center" }}>
         <span className="stt">{index + 1 + indexOfFirstItem}</span>
       </td>
 
@@ -82,7 +85,7 @@ const ListOrder = ({
       <td style={{ width: "90px", textAlign: "center" }}>
         {order.don_hang?.ma_hien_thi}
       </td>
-      <td style={{ width: "180px", textAlign: "center" }}>
+      <td style={{ width: "180px", textAlign: "center", padding: "0 10px" }}>
         {order.san_pham?.ten_san_pham}
       </td>
       <td style={{ width: "140px", textAlign: "center" }}>
@@ -123,6 +126,7 @@ const ListOrder = ({
         <td style={{ width: "100px", textAlign: "center" }}>
           {/* xác nhận */}
           <button
+            className="buttonListProduct"
             type="button"
             onClick={(e) => {
               e.stopPropagation();
@@ -134,6 +138,7 @@ const ListOrder = ({
           {status === "xacnhan" && (
             <>
               <button
+                className="buttonListProduct"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleShowPrintBill();
@@ -274,8 +279,10 @@ const ListOrder = ({
             onClose={handleCloseDetailOrder}
             status={status}
             statusHeader={statusHeader}
-            orderID={selectedOrder}
+            orderDetailID={selectedOrder}
             trangThaiBtn={trangThaiBtn}
+            setButton={setButton}
+            onReload = {onReload}
           />
         )
       }

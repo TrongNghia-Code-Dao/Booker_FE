@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { countUp } from "../countUp";
 
 import { getCuaHangById } from "../../utils/API/StoreAPI";
-import { getSanPhamByCuaHangId } from "../../utils/API/ProductAPI";
+import {
+  getMaxDaBanByMaCuaHang,
+  getMinDaBanByMaCuaHang,
+  getSanPhamByCuaHangId,
+} from "../../utils/API/ProductAPI";
 import { getVouchersByCuaHangId } from "../../utils/API/VoucherAPI";
 
 import "./Home.css";
@@ -23,6 +27,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import EarningChart from "../../chart/EarningChart";
 import SimpleLineChart from "../../chart/SimpleLineChart";
+import { countOrderDetailsByStatus } from "../../utils/API/OrderDetailsAPI";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -39,6 +44,16 @@ const Home = () => {
   const [yeuCauMoKhoa, setYeuCauMoKhoa] = useState(false);
   const [huyYeuCauMoKhoa, setHuyYeuCauMoKhoa] = useState(false);
 
+  // count đơn hàng
+  const [donMoi, setDonMoi] = useState(0);
+  const [hoanThanh, setHoanThanh] = useState(0);
+  const [daHuy, setDaHuy] = useState(0);
+  const [sumDonHang, setSumDonHang] = useState(0);
+
+  // lượt ban
+  const [maxDaBan, setMaxDaBan] = useState(0);
+  const [minDaBan, setMinDaBan] = useState(0);
+
   const handleShowStore = () => {
     setIsShowStore(true);
   };
@@ -50,12 +65,48 @@ const Home = () => {
   //     const data =
   // }
 
+  const fetchDataStore = async () => {
+    try {
+      const data = await getCuaHangById();
+      setStore(data);
+    } catch (error) {
+      console.log("Lỗi khi tải cửa hàng: ", error);
+    }
+  };
+
   useEffect(() => {
     // * Hàm lấy doanh thu theo đơn hàng đã giao của cửa hàng
     const fetchData = async () => {
       try {
         const data = await getCuaHangById();
         setStore(data);
+
+        const donMoiData = await countOrderDetailsByStatus(11);
+        setDonMoi(donMoiData);
+        const hoanThanhData = await countOrderDetailsByStatus(13);
+        setHoanThanh(hoanThanhData);
+        const khachHuyData = await countOrderDetailsByStatus(14);
+        const cuaHangHuyData = await countOrderDetailsByStatus(16);
+        setDaHuy(khachHuyData + cuaHangHuyData);
+        const dangVanChuyenData = await countOrderDetailsByStatus(12);
+        const traHangHoanTienData = await countOrderDetailsByStatus(15);
+        const traHangHoanTienYesData = await countOrderDetailsByStatus(17);
+        const traHangHoanTienNoData = await countOrderDetailsByStatus(18);
+        setSumDonHang(
+          donMoiData +
+            hoanThanhData +
+            khachHuyData +
+            cuaHangHuyData +
+            dangVanChuyenData +
+            traHangHoanTienData +
+            traHangHoanTienYesData +
+            traHangHoanTienNoData
+        );
+
+        const maxDaBanData = await getMaxDaBanByMaCuaHang();
+        const minDaBanData = await getMinDaBanByMaCuaHang();
+        setMaxDaBan(maxDaBanData);
+        setMinDaBan(minDaBanData);
 
         if (data.trang_thai_cua_hang?.ma_trang_thai_cua_hang === 11) {
           setChoDuyet(true);
@@ -69,9 +120,10 @@ const Home = () => {
           setHuyYeuCauMoKhoa(true);
         }
 
-        const numberDanhGia = data.diem_trung_binh
-          ? Math.round(data.diem_trung_binh * 10) / 10
+        const numberDanhGia = data.diem_cua_hang
+          ? Math.round(data.diem_cua_hang * 10) / 10
           : 0;
+
         setDiemCuaHang(numberDanhGia);
         countUp("countdt", 0, data.doanh_thu, 1200);
         countUp("countlb", 0, data.tong_luot_ban, 1200);
@@ -79,10 +131,12 @@ const Home = () => {
         const demSanPham = await getSanPhamByCuaHangId();
         setProducts(demSanPham); // Đặt giá trị sản phẩm sau khi lấy dữ liệu
         countUp("countsp", 0, demSanPham.length, 1200);
+        countUp("countsp2", 0, demSanPham.length, 1200);
 
         const demVoucher = await getVouchersByCuaHangId();
         setVouchers(demVoucher);
         countUp("countvc", 0, demVoucher.length, 1200);
+        countUp("countvc2", 0, demVoucher.length, 1200);
       } catch (e) {
         console.log(e);
       }
@@ -117,35 +171,35 @@ const Home = () => {
             <SalesAreaChart status={true} />
             <div className="infoOfStore_footer">
               <div className="infoOfStore_footer-item">
-                <span>10</span>
-                <p>Đơn mới</p>
+                <span>{maxDaBan}</span>
+                <p>Lượt bán cao nhất</p>
               </div>
               <div className="infoOfStore_footer-item">
-                <span>10</span>
-                <p>Hoàn thành</p>
+                <span>{minDaBan}</span>
+                <p>Lượt bán thấp nhất</p>
               </div>
-              <div className="infoOfStore_footer-item">
+              {/* <div className="infoOfStore_footer-item">
                 <span>10</span>
                 <p>Hủy đơn</p>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="infoOfStore-item2">
-            <p id="">0</p>
-            <h3>Lượt theo dõi</h3>
-            <span>Tổng số lượt theo dõi đã được thống kê. </span>
+            <p id="">{sumDonHang ? sumDonHang : 0}</p>
+            <h3>Số lượng đơn hàng</h3>
+            <span>Tổng số lượng đơn hàng đã được thống kê. </span>
             <SalesAreaChart status={false} />
             <div className="infoOfStore_footer2">
               <div className="infoOfStore_footer-item">
-                <span>109</span>
-                <p>Theo dõi mới</p>
+                <span>{donMoi}</span>
+                <p>Đơn mới</p>
               </div>
               <div className="infoOfStore_footer-item">
-                <span>10</span>
+                <span>{hoanThanh}</span>
                 <p>Hoàn thành</p>
               </div>
               <div className="infoOfStore_footer-item">
-                <span>10</span>
+                <span>{daHuy}</span>
                 <p>Hủy đơn</p>
               </div>
             </div>
@@ -275,7 +329,7 @@ const Home = () => {
             <div className="chartSmall-info">
               <div className="chartSmall-infoItem">
                 <div className="chartSmall-infoItem_head">
-                  <h1>10</h1>
+                  <h1 id="countsp2"></h1>
                   <p>Sản phẩm</p>
                 </div>
                 <SimpleLineChart status={true} />
@@ -283,7 +337,7 @@ const Home = () => {
 
               <div className="chartSmall-infoItem">
                 <div className="chartSmall-infoItem_head">
-                  <h1>10</h1>
+                  <h1 id="countvc2"></h1>
                   <p>Voucher</p>
                 </div>
                 <SimpleLineChart status={false} />
@@ -297,7 +351,6 @@ const Home = () => {
           <div className="chart-doanhThu">
             <EarningChart />
           </div>
-
         </div>
 
         {choDuyet === true && (
@@ -342,7 +395,11 @@ const Home = () => {
         )}
 
         {isShowStore === true && (
-          <StoreForm onClose={handleCloseStore} storeData={store} />
+          <StoreForm
+            onClose={handleCloseStore}
+            storeData={store}
+            onReload={fetchDataStore}
+          />
         )}
 
         {/* <div className="chart">

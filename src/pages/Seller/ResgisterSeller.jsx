@@ -132,7 +132,7 @@ const RegisterSeller = () => {
                 setHasNotified(true); // Đánh dấu đã hiển thị thông báo
 
                 setTimeout(() => {
-                    navigate('/HomeUserIndex');
+                    navigate('/booker.vn');
                     setHasNotified(false); // Reset trạng thái để thông báo lại khi cần
                 }, 3000);
             }

@@ -132,7 +132,7 @@ const ShoppingCart = () => {
         {cart.length === 0 ? (
           <div className="cart-content_no_product">
             <p>Giỏ hàng của bạn đang trống</p>
-            <button onClick={() => navigate("/HomeUserIndex")}>
+            <button onClick={() => navigate("/booker.vn")}>
               Quay lại trang chủ
             </button>
           </div>

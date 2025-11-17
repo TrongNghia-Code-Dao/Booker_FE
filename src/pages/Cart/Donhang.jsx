@@ -114,14 +114,14 @@ const DonHang = () => {
           : detail
       );
 
-      const lichSuTrangThaiDonHangItem = {
+      const lichSuTrangThaiDonHangItem1 = {
         status: "Đơn hàng đã bị tạm ngưng",
         message: "Bạn đã hủy đơn hàng",
         donHangChiTietId: orderDetailToCancel,
       };
 
       const lichSuTrangThaiDonHangData = await postLichSuTrangThaiGiaoHang(
-        lichSuTrangThaiDonHangItem
+        lichSuTrangThaiDonHangItem1
       );
 
       NotificationManager.success("Đơn hàng đã được hủy", "");
@@ -165,6 +165,18 @@ const DonHang = () => {
         )
       );
 
+      const lichSuTrangThaiDonHangItem2 = {
+        status: "Xác nhận đã nhận hàng",
+        message: "Giao hàng thành công",
+        donHangChiTietId: orderDetailId,
+      };
+
+      const lichSuTrangThaiDonHangData = await postLichSuTrangThaiGiaoHang(
+        lichSuTrangThaiDonHangItem2
+      );
+
+      console.log("lichSuTrangThaiDonHangData: ", lichSuTrangThaiDonHangData);
+
       NotificationManager.success("Đã xác nhận nhận hàng", "");
     } catch (error) {
       console.error("Lỗi khi xác nhận nhận hàng:", error);
@@ -197,6 +209,17 @@ const DonHang = () => {
             detail.trang_thai?.ten_trang_thai === activeStatus
         )
       );
+
+      const lichSuTrangThaiDonHangItem1 = {
+        status: "Yêu cầu trả hàng / hoàn tiền",
+        message: "Yêu cầu của bạn đã được gửi đến cửa hàng",
+        donHangChiTietId: orderDetailId,
+      };
+
+      const lichSuTrangThaiDonHangData = await postLichSuTrangThaiGiaoHang(
+        lichSuTrangThaiDonHangItem1
+      );
+
       NotificationManager.success("Đã gửi yêu cầu trả hàng - hoàn tiền", "");
     } catch (error) {
       console.error("Lỗi khi yêu cầu trả hàng/Hoàn tiền:", error);
@@ -311,7 +334,7 @@ const DonHang = () => {
                   <div className={styles.orderDetailHeaderM}>
                     <div className={styles.orderDetailHeader}>
                       <div className={styles.orderDetailHeaderShop}>
-                        <p>{detail.san_pham.cua_hang.ten_cua_hang}</p>
+                        <p  >{detail.san_pham.cua_hang.ten_cua_hang}</p>
                         <button
                           onClick={() =>
                             handleChatOpen(detail.san_pham.cua_hang.ma_cua_hang)

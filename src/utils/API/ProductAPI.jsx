@@ -31,6 +31,8 @@ export const getSanPhamByCuaHangId = async () => {
     throw error; // Xử lý lỗi
   }
 };
+
+
 export const getProductByIdStore = async (idStore) => {
   try {
     const response = await axios.get(`${hostProduct}/cuahang-${idStore}`);
@@ -563,14 +565,16 @@ export const getProductsByDaBanDesc = async () => {
 
 //    tìm tất cả sản phẩm theo mã thể loại và sắp ếp theo lượt bán từ cao --> thấp
 export const getProductsByMaTheLoaiAndSapXep = async (maTheLoai) => {
-    try {
-        const respone = await axios.get(`${hostProduct}/banchay/matheloai-${maTheLoai}`)
-        return respone.data
-    } catch (error) {
-        console.error("Error fetching store details:", error);
+  try {
+    const respone = await axios.get(
+      `${hostProduct}/banchay/matheloai-${maTheLoai}`
+    );
+    return respone.data;
+  } catch (error) {
+    console.error("Error fetching store details:", error);
     throw error;
-    }
-}
+  }
+};
 
 // * Hàm tìm kiếm sản phẩm
 export const filterProduct = async (min, max, orderBy, idCategory) => {
@@ -595,3 +599,63 @@ export const findProductsByMaTheLoai = async (maTheLoai) => {
     throw error;
   }
 };
+
+// Hàm get lượt đã bán max và min
+export const getMaxDaBanByMaCuaHang = async () => {
+  try {
+    const storeID = await StoreApi(); // Đợi StoreApi trả về storeID
+    if (!storeID) {
+      throw new Error("Store ID is not available");
+    }
+    const response = await axios.get(
+      `${hostProduct}/cuahang-${storeID}/max-da-ban`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching store details:", error);
+    throw error;
+  }
+};
+export const getMinDaBanByMaCuaHang = async () => {
+  try {
+    const storeID = await StoreApi();
+    if (!storeID) {
+      throw new Error("Store ID is not available");
+    }
+    const response = await axios.get(
+      `${hostProduct}/cuahang-${storeID}/min-da-ban`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching store details:", error);
+    throw error;
+  }
+};
+
+export const countDistinctCuaHangHoatDong = async () => {
+  try {
+    const response = await axios.get(
+      `${hostProduct}/admin/count-distinct-cua-hang-hoat-dong`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching store details:", error);
+    throw error;
+  }
+};
+
+export const tongDaBan = async () => {
+  try {
+    const response = await axios.get(
+      `${hostProduct}/admin/sum-da-ban`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching store details:", error);
+    throw error;
+  }
+};
+
+
+
+

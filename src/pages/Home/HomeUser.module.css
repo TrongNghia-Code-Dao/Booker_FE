@@ -674,7 +674,7 @@ span {
   color: #707070;
   font-size: 15px;
   cursor: pointer;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   transition: all 0.2s ease-in-out;
 }
 .searchBarCategoryList ul {
@@ -696,7 +696,7 @@ span {
 .nameTacGia {
   color: #20ad7c;
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 5px !important;
 }
 
 /* ======================================================= */

@@ -54,6 +54,7 @@ const CheckOut = () => {
 
   const navigate = useNavigate();
   const [searchResults, setSearchResults] = useState([]);
+  const [loiNhan, setLoiNhan] = useState("");
 
   const handleSearchResults = (results) => {
     setSearchResults(results);
@@ -267,13 +268,18 @@ const CheckOut = () => {
     }
   };
 
+  // lưu lời nhắn
+  const handleChange = (e) => {
+    setLoiNhan(e.target.value); // cập nhật mỗi khi người dùng gõ
+  };
+
   const createBookerPay = async () => {
     const userId = JSON.parse(sessionStorage.getItem("user")).id_tai_khoan;
     const addressId = address?.ma_dia_chi;
 
     let orderDetails = null;
 
-    // tạo thông tin đơn hàng tổng
+    // tạo thông tin đơn hàng chi tiết
     if (phuongThuc !== 3) {
       orderDetails = checkoutCart.map((item, index) => {
         const discountProduct = voucherSelected[index] || 0;
@@ -311,7 +317,10 @@ const CheckOut = () => {
       // Tạo đơn hàng
       const createOrderResponse = await axios.post(
         `http://localhost:8080/api/v1/donhang/create/taikhoan-${userId}/diachi-${addressId}`,
-        []
+        {
+          loi_nhan: loiNhan, 
+          // orderDetails: orderDetails, 
+        }
       );
 
       const orderId = createOrderResponse.data.ma_don_hang;
@@ -685,7 +694,11 @@ const CheckOut = () => {
                   <div className="additional-info">
                     <div className="additional-info-loinhan">
                       <label>Lời nhắn:</label>
-                      <textarea placeholder="Lưu ý cho người bán ..."></textarea>
+                      <textarea
+                        value={loiNhan}
+                        onChange={handleChange}
+                        placeholder="Lưu ý cho người bán ..."
+                      ></textarea>
                     </div>
                     <div className="additional-info-vanchuyen">
                       <div style={{ padding: "20px" }}>
@@ -803,7 +816,9 @@ const CheckOut = () => {
                             );
                           })
                         ) : (
-                          <p className="no-voucher-saved">Không có Voucher được lưu.</p>
+                          <p className="no-voucher-saved">
+                            Không có Voucher được lưu.
+                          </p>
                         )}
                       </div>
                     </div>

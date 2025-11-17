@@ -2,9 +2,10 @@
     width: 430px !important;
     height: 590px !important; 
     padding: 20px; 
-    position: relative;
-    margin-top: 70px !important;
-    margin-left: 950px !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 } 
 
 .update-form_title{
@@ -34,6 +35,7 @@
 .update-form_inp > div > label{
     width: 400px;
     margin-top: -4px;
+    font-family: 'OpenSans', sans-serif;
 }
 .update-form_btn{
     display: flex;

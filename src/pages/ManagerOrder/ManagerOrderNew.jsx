@@ -57,7 +57,7 @@ const ManagerOrder = () => {
       );
       setListOrder(listOrderData);
     } catch (err) {
-      console.log("L��i khi tìm kiếm theo mã đơn hàng" + err);
+      console.log("Lỗii khi tìm kiếm theo mã đơn hàng" + err);
     }
   };
 
@@ -92,26 +92,26 @@ const ManagerOrder = () => {
     fetchOrderData();
   };
 
+  const fetchOrderData = async () => {
+    try {
+      const listOrderData = await getOrderDetailsByTrangThai(maTrangThai);
+      setListOrder(listOrderData);
+
+      const revenueData = await calculateNewOrderRevenue(maTrangThai);
+      setTotalRevenue(revenueData);
+
+      const countOrderDetailsByStatusData = await countOrderDetailsByStatus(
+        maTrangThai
+      );
+      setOrderDetailsCount(countOrderDetailsByStatusData);
+    } catch (err) {
+      console.log("Lỗi khi load order mới" + err);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     setIsLoading(true);
-
-    const fetchOrderData = async () => {
-      try {
-        const listOrderData = await getOrderDetailsByTrangThai(maTrangThai);
-        setListOrder(listOrderData);
-
-        const revenueData = await calculateNewOrderRevenue(maTrangThai);
-        setTotalRevenue(revenueData);
-
-        const countOrderDetailsByStatusData = await countOrderDetailsByStatus(
-          maTrangThai
-        );
-        setOrderDetailsCount(countOrderDetailsByStatusData);
-      } catch (err) {
-        console.log("Lỗi khi load order mới" + err);
-      }
-      setIsLoading(false);
-    };
 
     fetchOrderData();
   }, []);
@@ -119,7 +119,7 @@ const ManagerOrder = () => {
   return (
     <div className="page">
       <div className="pageHead">
-        <h3>Quản lý sản phẩm</h3>
+        <h3>Quản lý đơn hàng</h3>
         <Breadcrumb paths={["Quản lý đơn hàng", "Đơn hàng mới"]} />
       </div>
       <div className="containerProduct">
@@ -128,7 +128,6 @@ const ManagerOrder = () => {
         ) : (
           <>
             <div className="productbtn-list">
-
               <div className="productbtn-item productbtn-item_updateInfo">
                 <div className="productbtn-item_flex">
                   <button className=" btn1" onClick={handleResetSearch}>
@@ -149,8 +148,10 @@ const ManagerOrder = () => {
                     <LuChartNoAxesCombined size={33} color="#fff" />
                   </button>
                   <div className="productbtn-itemInfo">
-                    <h1>{totalRevenue ? totalRevenue.toLocaleString("vi-VN") : 0}
-                  <span>₫</span></h1>
+                    <h1>
+                      {totalRevenue ? totalRevenue.toLocaleString("vi-VN") : 0}
+                      <span>₫</span>
+                    </h1>
                   </div>
                 </div>
                 <div className="productbtn-item_name">
@@ -225,6 +226,7 @@ const ManagerOrder = () => {
               status="xacnhan"
               statusHeader={"Xác nhận đơn hàng"}
               keyForm={"seller"}
+              onReload = {fetchOrderData}
             />
           </>
         )}

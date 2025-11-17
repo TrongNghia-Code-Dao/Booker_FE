@@ -100,10 +100,9 @@
   left: 0;
 }
 
-.tacGiaSmall{
+.tacGiaSmall {
   margin-bottom: 5px !important;
 }
-
 
 .productName {
   text-align: center;
@@ -133,7 +132,7 @@
   font-size: 20px;
   color: #f25821;
   font-weight: bold;
-  font-family: 'ABeeZee', sans-serif;
+  font-family: "ABeeZee", sans-serif;
   display: inline-block;
   text-align: left;
   letter-spacing: 1px;
@@ -174,11 +173,14 @@
   font-weight: 600;
 }
 
+.menuBar > ul > li:nth-child(1) {
+  margin-top: 20px;
+}
 .arrowR {
   float: right;
   font-size: 12px;
   margin-right: 10px;
-  margin-top: 3px;
+  margin-top: 7px;
 }
 
 .menuBar > ul > li:hover {
@@ -386,7 +388,7 @@
 
 .listBookHeader h3 {
   font-weight: 600;
-  color: #625c66;
+  color: #6e6a70;
   font-size: 19px;
   font-family: "ABeeZee", sans-serif;
   text-transform: uppercase;
@@ -398,13 +400,15 @@
 }
 
 .listBookOption ul li {
-  color: #ccc;
+  color: #999999;
   margin: 0 20px;
   height: 20px;
   line-height: 20px;
   cursor: pointer;
   position: relative;
 }
+
+
 
 .listBookOption ul li::after {
   content: "";
@@ -743,10 +747,14 @@
 }
 .bangXepHangProductItem {
   display: flex;
+  align-items: center;
   width: 100%;
   height: auto;
   padding: 20px;
   cursor: pointer;
+}
+.daBan{
+  font-size: 1.4rem;
 }
 .bangXepHangProductItem:hover {
   /* box-shadow: 0 0 10px #888; */
@@ -894,6 +902,6 @@
   color: #ffb21e;
 }
 
-.buy{
+.buy {
   margin-left: 10px;
 }

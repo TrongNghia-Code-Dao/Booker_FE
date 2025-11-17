@@ -282,24 +282,24 @@ const HomeUserIndex = () => {
     }, 2000);
   };
 
-  const [hienalert, setHienalert] = useState(false);
+  // const [hienalert, setHienalert] = useState(false);
   //* Hàm "Mua ngay"
   const buyNow = (product) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user) {
-      if (!hienalert) {
+      // if (!hienalert) {
         // Chỉ hiển thị thông báo nếu chưa hiển thị lần nào
         NotificationManager.warning(
           "Vui lòng đăng nhập để mua sản phẩm",
           "Chưa đăng nhập"
         );
-        setHienalert(true); // Đánh dấu đã hiển thị thông báo
+        // setHienalert(true); 
 
-        setTimeout(() => {
-          navigate("/login");
-          setHienalert(false); // Reset trạng thái để thông báo lại khi cần
-        }, 3000);
-      }
+        // setTimeout(() => {
+        //   navigate("/login");
+        //   setHienalert(false); 
+        // }, 3000);
+      // }
       return;
     }
 
@@ -360,7 +360,7 @@ const HomeUserIndex = () => {
           <div className={styles.menuBar}>
             <ul>
               <li onClick={() => handleCategoryClick(1)}>
-                <FontAwesomeIcon icon={faBook} style={{ marginRight: "7px" }} />
+                <FontAwesomeIcon icon={faBook} style={{ marginRight: "7px"}} />
                 Văn học
                 <FontAwesomeIcon
                   icon={faAngleRight}
@@ -680,6 +680,7 @@ const HomeUserIndex = () => {
                           <p>{product.gia_sol || 0} SOL</p>
                         </div> */}
                       </div>
+                      <p className={styles.daBan}>Đã bán: {product.da_ban}</p>
                     </div>
                   </div>
                 ))}

@@ -58,7 +58,7 @@ const ManageProduct = () => {
   // const [solForm, setSolForm] = useState(false);
 
   const handleVisibleForm = () => {
-    // store.dia_chi_vi_sol === null ? setSolForm(true) : 
+    // store.dia_chi_vi_sol === null ? setSolForm(true) :
     setAddBookVisible(true);
   };
 
@@ -157,46 +157,45 @@ const ManageProduct = () => {
 
   const [store, setStore] = useState({});
 
+  const fetchData = async () => {
+    try {
+      const store = await getCuaHangById();
+      setStore(store);
+
+      const productsAll = await getSanPhamByCuaHangId();
+      setProducts(productsAll);
+
+      const categoryData = await getCategory();
+      setCategory(categoryData);
+
+      const countBooks = await getCountBooksAll();
+      setProductCount(countBooks);
+
+      const countClock = await getNumberOfBookByClock();
+      setClock(countClock);
+
+      const countInStock = await getNumberOfBookByInStock();
+      setInStock(countInStock);
+
+      const countOutOfStock = await getNumberOfBookByOutOfStock();
+      setOutOfStock(countOutOfStock);
+
+      const countBrose = await getNumberOfBookByBrowse();
+      setBrowse(countBrose);
+
+      const countAn = await getNumberOfBookByHidden();
+      setAn(countAn);
+
+      const datayeucau = await getNumberOfBookByYeuCauMoKhoa();
+      setyeucaumokhoa(datayeucau);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     setIsLoading(true);
-    const fetchData = async () => {
-      try {
-        const store = await getCuaHangById();
-        setStore(store);
-
-        const productsAll = await getSanPhamByCuaHangId();
-        setProducts(productsAll);
-
-        const categoryData = await getCategory();
-        setCategory(categoryData);
-
-        const countBooks = await getCountBooksAll();
-        setProductCount(countBooks);
-
-        const countClock = await getNumberOfBookByClock();
-        setClock(countClock);
-
-        const countInStock = await getNumberOfBookByInStock();
-        setInStock(countInStock);
-
-        const countOutOfStock = await getNumberOfBookByOutOfStock();
-        setOutOfStock(countOutOfStock);
-
-        const countBrose = await getNumberOfBookByBrowse();
-        setBrowse(countBrose);
-
-        const countAn = await getNumberOfBookByHidden();
-        setAn(countAn);
-
-        const datayeucau = await getNumberOfBookByYeuCauMoKhoa();
-        setyeucaumokhoa(datayeucau);
-
-        // await new Promise((resolve) => setTimeout(resolve, 10000));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-      setIsLoading(false);
-    };
 
     fetchData();
   }, []);
@@ -214,123 +213,144 @@ const ManageProduct = () => {
           </>
         ) : (
           <>
-            <div className="productbtn-list">
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn1"
-                    onClick={() => getProductsAllByStoreID()}
-                  >
-                    <PiBookBookmarkBold size={33} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{productCount}</h1>
+            <div className="productbtn-listUpdate">
+              <div className="productbtn-listUpdate_flex">
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn1"
+                      onClick={() => getProductsAllByStoreID()}
+                    >
+                      <PiBookBookmarkBold size={33} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{productCount}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Tổng sản phẩm</p>
                   </div>
                 </div>
-                <div className="productbtn-item_name">
-                  <p>Tổng sản phẩm</p>
+
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn2"
+                      onClick={() => handleSearchByStatus(2)}
+                    >
+                      <LuBookLock size={30} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{clock}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Sách bị khóa</p>
+                  </div>
+                </div>
+
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn3"
+                      onClick={() => handleSearchByStatus(1)}
+                    >
+                      <LuBookOpenCheck size={30} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{browse}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Sách chờ duyệt</p>
+                  </div>
+                </div>
+
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn4"
+                      onClick={() => handleSearchByStatus(3)}
+                    >
+                      <PiBooks size={34} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{inStock}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Sách còn hàng</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn2"
-                    onClick={() => handleSearchByStatus(2)}
-                  >
-                    <LuBookLock size={30} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{clock}</h1>
+              <div className="productbtn-listUpdate_flex mt-30">
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn5"
+                      onClick={() => handleSearchByStatus(4)}
+                    >
+                      <TbBooksOff size={33} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{outOfStock}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Sách hết hàng</p>
                   </div>
                 </div>
-                <div className="productbtn-item_name">
-                  <p>Sách bị khóa</p>
-                </div>
-              </div>
 
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn3"
-                    onClick={() => handleSearchByStatus(1)}
-                  >
-                    <LuBookOpenCheck size={30} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{browse}</h1>
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn6"
+                      onClick={() => handleSearchBookHidden()}
+                    >
+                      <VscEyeClosed size={33} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{an}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Sách đang ẩn</p>
                   </div>
                 </div>
-                <div className="productbtn-item_name">
-                  <p>Sách chờ duyệt</p>
-                </div>
-              </div>
 
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn4"
-                    onClick={() => handleSearchByStatus(3)}
-                  >
-                    <PiBooks size={34} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{inStock}</h1>
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn7"
+                      onClick={() => handleSearchByStatus(5)}
+                    >
+                      <LuBookKey size={33} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{yeucaumokhoa}</h1>
+                    </div>
+                  </div>
+                  <div className="productbtn-item_name">
+                    <p>Yêu cầu mở khóa</p>
                   </div>
                 </div>
-                <div className="productbtn-item_name">
-                  <p>Sách còn hàng</p>
-                </div>
-              </div>
 
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn5"
-                    onClick={() => handleSearchByStatus(4)}
-                  >
-                    <TbBooksOff size={33} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{outOfStock}</h1>
+                <div className="productbtn-item productbtn-item_update">
+                  <div className="productbtn-item_flex">
+                    <button
+                      className=" btn7"
+                      onClick={() => handleSearchByStatus(5)}
+                    >
+                      <LuBookKey size={33} color="#fff" />
+                    </button>
+                    <div className="productbtn-itemInfo">
+                      <h1>{yeucaumokhoa}</h1>
+                    </div>
                   </div>
-                </div>
-                <div className="productbtn-item_name">
-                  <p>Sách hết hàng</p>
-                </div>
-              </div>
-
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn6"
-                    onClick={() => handleSearchBookHidden()}
-                  >
-                    <VscEyeClosed size={33} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{an}</h1>
+                  <div className="productbtn-item_name">
+                    <p>Sách không được duyệt</p>
                   </div>
-                </div>
-                <div className="productbtn-item_name">
-                  <p>Sách đang ẩn</p>
-                </div>
-              </div>
-
-              <div className="productbtn-item">
-                <div className="productbtn-item_flex">
-                  <button
-                    className=" btn7"
-                    onClick={() => handleSearchByStatus(5)}
-                  >
-                    <LuBookKey size={33} color="#fff" />
-                  </button>
-                  <div className="productbtn-itemInfo">
-                    <h1>{yeucaumokhoa}</h1>
-                  </div>
-                </div>
-                <div className="productbtn-item_name">
-                  <p>Yêu cầu mở khóa</p>
                 </div>
               </div>
             </div>
@@ -403,11 +423,16 @@ const ManageProduct = () => {
               keySearch={searchKey}
               searchName={searchName}
               isLoading={isLoading}
+              onReload={fetchData}
             ></ListProduct>
 
             {/* Thông tin sách */}
             {isAddBookVisible && (
-              <BookForm keyForm={"add-book"} onClose={handleHiddenForm} />
+              <BookForm
+                keyForm={"add-book"}
+                onClose={handleHiddenForm}
+                onReload={fetchData}
+              />
             )}
             {/* {solForm && (
               <SolanaForm store={store} onClose={handleCloseSOLForm} />

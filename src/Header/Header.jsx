@@ -190,7 +190,7 @@ const Header = () => {
                 <Link to="/booker.vn/profile">
                   <li> <FontAwesomeIcon icon={faUser}  className="iconLink"/> Tài khoản</li>
                 </Link>
-                <Link to="/HomeUserIndex">
+                <Link to="/booker.vn">
                   <li> <FontAwesomeIcon icon={faMoneyBill1} className="iconLink"/> Tiếp tục mua hàng</li>
                 </Link>
                 <Link to="/booker.vn/close-store">

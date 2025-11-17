@@ -73,6 +73,28 @@ html, body {
   padding-top: 80px;
 }
 
+.scroll-container3 {
+  width: 100%;
+  max-height: 589px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* Nếu muốn scrollbar trông gọn gàng */
+.scroll-container3::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scroll-container3::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.scroll-container3::-webkit-scrollbar-track {
+  background: transparent; /* để thấy bo góc của cha */
+}
+
 /* Tùy chỉnh thanh cuộn */
 ::-webkit-scrollbar {
   width: 5px;

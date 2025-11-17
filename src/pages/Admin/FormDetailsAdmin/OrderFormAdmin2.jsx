@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import "./FormVisibleAll.css";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-
-import Notification from "../Notification/Notification";
-import PrintBill from "./PrintBill";
+import Notification from "../../../utils/Notification/Notification";
+import PrintBill from "../../../utils/FormVisible/PrintBill";
 
 import {
+  getDetail,
   getInfoOfOrderDetailById,
   updateOrderDetailStatus,
-} from "../../utils/API/OrderDetailsAPI";
-import Alert from "../../utils/Order/Alert";
-import { getDonHangById } from "../API/OrderAPI";
+} from "../../../utils/API/OrderDetailsAPI";
+import Alert from "../../../utils/Order/Alert";
+import { getDonHangById } from "../../../utils/API/OrderAPI";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import { postLichSuTrangThaiGiaoHang } from "../API/LichSuTrangThaiGiaoHangAPI";
+import { postLichSuTrangThaiGiaoHang } from "../../../utils/API/LichSuTrangThaiGiaoHangAPI";
 
 const OrderForm = ({
   onClose,
@@ -40,7 +36,7 @@ const OrderForm = ({
 
   const fetchData = async () => {
     try {
-      const orderDetailData = await getInfoOfOrderDetailById(orderDetailID);
+      const orderDetailData = await getDetail(orderDetailID);
       const idOrder = orderDetailData.don_hang?.ma_don_hang;
       setOrderDetail(orderDetailData);
 
@@ -468,85 +464,9 @@ const OrderForm = ({
                 </div>
 
                 <div className="order-form_button">
-                  {status === "xacnhan" && (
-                    <>
-                      <div className="order-form_button-item">
-                        <button
-                          className="buttonDefault"
-                          onClick={handleShowCancelOrder}
-                        >
-                          Hủy đơn
-                        </button>
-
-                        <button
-                          className="buttonDefault"
-                          onClick={handleShowPrintBill}
-                        >
-                          In hóa đơn
-                        </button>
-
-                        <button className="buttonDefault" onClick={onClose}>
-                          Đóng
-                        </button>
-                      </div>
-
-                      <button
-                        className="buttonMain"
-                        onClick={handleShowApplyOrder}
-                      >
-                        Xác nhận đặt hàng
-                      </button>
-                    </>
-                  )}
-                  {status === "trahang" && trangThaiBtn === true && (
-                    <>
-                      <div className="order-form_button-item">
-                        <button
-                          className="buttonDefault2"
-                          onClick={handleShowThongBaoHuyTraHang}
-                        >
-                          Hủy yêu vầu
-                        </button>
-                        <button
-                          className="buttonDefault2"
-                          onClick={handleShowXacNhanThongBaoHuyTraHang}
-                        >
-                          Xác nhận trả hàng
-                        </button>
-                      </div>
-                      <button className="buttonMain" onClick={onClose}>
-                        Đóng
-                      </button>
-                    </>
-                  )}
-                  {setButton === true && (
-                    <>
-                      <button className="buttonMain" onClick={onClose}>
-                        Đóng
-                      </button>
-                    </>
-                  )}
-                  {status === "huydon" && (
-                    <>
-                      <button className="buttonMain" onClick={onClose}>
-                        Đóng
-                      </button>
-                    </>
-                  )}
-                  {status === "dangvanchuyen" && (
-                    <>
-                      <button className="buttonMain" onClick={onClose}>
-                        Đóng
-                      </button>
-                    </>
-                  )}
-                  {status === "dagiao" && (
-                    <>
-                      <button className="buttonMain" onClick={onClose}>
-                        Đóng
-                      </button>
-                    </>
-                  )}
+                  <button className="buttonMain" onClick={onClose}>
+                    Đóng
+                  </button>
                 </div>
               </div>
             </div>

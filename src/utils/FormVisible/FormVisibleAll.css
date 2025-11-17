@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
+p{
+  margin-bottom: 0 !important;
+}
 /** Thêm sản phẩm mới  */
 .bg_black {
   background-color: #00000088;
@@ -15,14 +18,12 @@
 }
 /* khung thêm sản phẩm */
 .addnewbook {
-  width: 1500px !important;
+  width: 60%;
+  height: 70%;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   padding: 20px;
-  height: 700px;
   position: absolute;
-  /* margin-left: 50%; */
-  /* transform: translate(-50%); */
   animation: identifier 0.5s ease-in-out forwards;
 }
 
@@ -98,16 +99,18 @@
 
 .addnewbook-form_img {
   width: 23%;
-  height: 470px;
+  height: 430px;
   object-fit: cover;
-  border: 1.5px solid #ccc;
 }
-.addnewbook-form_img span {
-  display: block;
-}
+
 .addnewbook-form_img img {
   width: 100%;
   height: 100%;
+}
+
+
+.addnewbook-form_img span {
+  display: block;
 }
 
 .btnCheckBorder-success {
@@ -126,7 +129,15 @@
   color: red;
   font-size: 1.2rem;
   margin-top: 10px;
-  margin-left: 95px;
+  margin-left: 90px;
+}
+
+.spanforISBN{
+  position: absolute;
+  top: -5px;
+  left: 70px;
+  font-size: 1.4rem;
+  color: #afafaf;
 }
 
 .custom-file-input {
@@ -139,7 +150,7 @@
   font-size: 1.2rem;
   text-align: center;
   border: 1px solid gray;
-  margin-left: 110px;
+  margin-left: 105px;
   margin-top: 10px;
 }
 
@@ -174,6 +185,7 @@
 /* thẻ input */
 .addnewbook-form_info {
   width: 24%;
+  /* position: relative; */
 }
 
 .addnewbook-form_info div {
@@ -195,6 +207,7 @@
   display: block;
   font-size: 1.5rem;
   font-weight: 500;
+  margin-left: 7px;
 }
 .addnewbook-form_info input:focus {
   outline: 1px solid #f3452e;
@@ -216,7 +229,7 @@
 .addnewbook-form_info span {
   color: red;
   position: absolute;
-  right: 15px;
+  right: 10px;
   font-size: 1.2rem;
 }
 
@@ -232,7 +245,7 @@
 .addnewbook-form_longinp2 textarea {
   border-radius: 4px;
   width: 100%;
-  height: 570px;
+  height: 362px;
   color: #000000;
   outline: none;
   padding: 12px;
@@ -263,19 +276,18 @@
 .addnewbook-form_btn {
   position: absolute;
   bottom: 15px;
-  left: 20px;
-  width: 69%;
+  right: 20px;
   display: flex;
 }
 
 .addnewbook-form_btn button {
-  width: 240px;
+  padding: 5px 14px;
   font-size: 1.7rem;
   font-weight: 500;
   border-radius: 10px;
-  height: 40px;
-  margin-right: 20px;
+  margin-left: 20px;
   transition: all 0.2s ease-in-out;
+  font-family: 'Roboto', sans-serif;
 }
 .btn_an_sp {
   display: flex;
@@ -348,12 +360,11 @@
 .order-form {
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 20px;
+  padding: 0;
   height: auto;
   width: 1150px;
-  transform: translate(-63%);
   animation: identifier 0.5s ease-in-out forwards;
-  overflow-y: auto;
+  overflow: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -478,7 +489,7 @@
 .order-form_bodyMoney-pttt_info {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px 6px;
+  padding:  8px 6px;
   font-size: 1.6rem;
 }
 
@@ -574,6 +585,7 @@
   /* background-color: #f8f7fc; */
   border-radius: 5px;
   margin-top: 15px;
+  /* margin-bottom: 15px; */
   padding-bottom: 15px;
 }
 
@@ -696,26 +708,38 @@
 
 /* * 3 nút */
 .order-form_button {
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
-.order-form_button-item{
+.order-form_button-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-top: 15px;
 }
 
-.buttonDefault{
+.buttonDefault {
   width: 31.5%;
   height: 50px;
+  padding: 0 10px;
   background-color: #fff;
   border: 1px solid #c9c9c9 !important;
   border-radius: 5px;
   font-size: 1.8rem;
 }
 
-.buttonMain{
+.buttonDefault2{
+  width: 47.5%;
+  height: 50px;
+  /* padding: 0 10px; */
+  background-color: #fff;
+  border: 1px solid #c9c9c9 !important;
+  border-radius: 5px;
+  font-size: 1.8rem;
+}
+
+.buttonMain {
   margin-top: 15px;
   width: 100%;
   height: 50px;
@@ -895,11 +919,8 @@
 .voucher-form {
   /* background-color: black; */
   border-radius: 10px;
-  margin-top: 10px;
-  margin-left: 35%;
   width: 700px;
   height: 700px;
-  transform: translate(-63%);
   animation: identifier 0.5s ease-in-out forwards;
 }
 
@@ -1003,7 +1024,7 @@
 /* *form */
 .voucher-info {
   position: absolute;
-  top: 290px;
+  top: 400px;
   margin-left: 3px;
   background-color: #fff;
   width: 687px;
@@ -1080,7 +1101,7 @@
 
 .item-update > div:nth-child(2) > input {
   border-radius: 0;
-  margin-top: 49.5px;
+  margin-top: 51px;
   text-align: center;
 }
 
@@ -1170,8 +1191,8 @@
 }
 
 .store-form {
-  width: 550px ;
-  height: 450px ;
+  width: 550px;
+  height: 450px;
   position: absolute;
   animation: identifier 0.5s ease-in-out forwards;
 }
@@ -1336,7 +1357,7 @@
   font-weight: 600;
   font-size: 1.7rem;
   border-radius: 12px;
-  font-family: 'OpenSans', sans-serif;
+  font-family: "OpenSans", sans-serif;
   letter-spacing: 1px;
 }
 .store-form_btn1 {
@@ -1369,9 +1390,10 @@
 
 .category-form {
   width: 550px;
-  height: 420px;
-  margin-top: 160px !important;
-  margin-left: 40%;
+  height: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
   /* transform: translate(-88%); */
 }
 .category-form-input {
@@ -1413,14 +1435,14 @@
 .category-form-button {
   width: 100%;
   text-align: center;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .btn-add-category {
   width: 170px;
   height: 40px;
   border-radius: 12px;
   font-size: 1.7rem;
-  margin: 20px;
+  margin: 20px 20px 0px 20px;
   font-weight: 600;
   font-family: "Fredoka", sans-serif;
 }

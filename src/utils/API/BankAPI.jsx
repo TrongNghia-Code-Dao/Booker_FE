@@ -13,22 +13,34 @@ const hostBank = "http://localhost:8080/api/v1/tai-khoan-ngan-hang";
 //     }
 // }
 
-export const getAllBank = () => {
-    return axios.get("https://api.httzip.com/api/bank/list")
-        .then(response => {
-            console.log("API Response:", response);  // Logs full response to inspect structure
-            if (response.data && response.data.success) {
-                return response.data.data;  // Return the 'data' field if 'success' is true
-            } else {
-                console.error("API returned an unsuccessful response");
-                return [];  // Return an empty array as a fallback
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching bank data:", error);
-            return [];  // Return an empty array on error
-        });
-}
+// export const getAllBank = () => {
+//     return axios.get("https://api.httzip.com/api/bank/list")
+//         .then(response => {
+//             console.log("API Response:", response);  // Logs full response to inspect structure
+//             if (response.data && response.data.success) {
+//                 return response.data.data;  // Return the 'data' field if 'success' is true
+//             } else {
+//                 console.error("API returned an unsuccessful response");
+//                 return [];  // Return an empty array as a fallback
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error fetching bank data:", error);
+//             return [];  // Return an empty array on error
+//         });
+// }
+
+
+export const getAllBank = async () => {
+  try {
+    const response = await axios.get("https://api.vietqr.io/v2/banks");
+    return response.data.data; // danh sách ngân hàng nằm ở đây
+  } catch (error) {
+    console.error("Error fetching bank data:", error);
+    return [];
+  }
+};
+
 
 // * Hàm thêm tài khoản ngân hàng mới
 export const addTaiKhoanNganHang = (data) => {

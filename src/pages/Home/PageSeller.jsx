@@ -57,7 +57,7 @@ const StorePage = () => {
 
         // Lấy danh sách sản phẩm của cửa hàng
         const productsResponse = await axios.get(
-          `http://localhost:8080/api/v1/product/cuahang-${id_cua_hang}/allinfo`
+          `http://localhost:8080/api/v1/product/cuahang-${id_cua_hang}/sanpham-page-seller`
         );
         setNumberProducts(productsResponse.data.length);
         setProducts(productsResponse.data);

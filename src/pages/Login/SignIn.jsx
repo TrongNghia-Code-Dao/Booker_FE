@@ -4,6 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./SignIn.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,10 +44,11 @@ const Login = () => {
         console.log(response.data.result.vai_tro.ma_vai_tro);
 
         // Chuyển hướng đến trang /HomeUser sau khi đăng nhập thành công
-        navigate("/HomeUserIndex");
-        if (response.data.result.vai_tro.ma_vai_tro == 3) {
+        navigate("/booker.vn");
+        if (response.data.result.vai_tro.ma_vai_tro === 3) {
           navigate("/admin");
         }
+        NotificationManager.success("Đăng nhập thành công", "");
       } else {
         setError(response.data.message || "Đăng nhập thất bại");
       }
@@ -101,7 +106,10 @@ const Login = () => {
 
             <div className="forgot-password">
               <Link to="/forgot-password">
-                <span>Quên mật khẩu</span>
+                <p>Quên mật khẩu</p>
+              </Link>
+              <Link to="/booker.vn">
+                <p>Quay lại trang chủ</p>
               </Link>
             </div>
             <div className="login-register-link">
@@ -115,6 +123,7 @@ const Login = () => {
       </section>
 
       {/* <FooterUser /> */}
+      <NotificationContainer />
     </div>
   );
 };

@@ -97,8 +97,8 @@ const KhoVoucher = ({ idTaiKhoan }) => {
                     {voucher.voucher?.ten_voucher ||
                       "Tên voucher không xác định"}
                   </p>
-                  <p>Giảm ₫{voucher.voucher?.giam_gia || 0}</p>
-                  <p>Giá tối thiểu ₫{voucher.voucher?.gia_ap_dung || 0}</p>
+                  <p>Giảm ₫{voucher.voucher?.giam_gia.toLocaleString("vi-VN") || 0}</p>
+                  <p>Giá tối thiểu ₫{voucher.voucher?.gia_ap_dung.toLocaleString("vi-VN") || 0}</p>
                   <p>HSD: {voucher.voucher?.ngay_het_han || "Không rõ"}</p>
                 </div>
                 <div className="voucher-user_item_sld">

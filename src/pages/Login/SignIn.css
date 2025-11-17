@@ -73,7 +73,7 @@
   font-weight: bold;
 }
 
-.forgot-password span:hover {
+.forgot-password p:hover {
   text-decoration: underline;
 }
 

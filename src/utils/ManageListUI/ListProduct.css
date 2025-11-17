@@ -91,6 +91,7 @@
 
 .table-container td {
   font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .table-container td img {
@@ -114,25 +115,25 @@
   border-bottom: 1px solid #cccccc7c;
 }
 
-.table-container tbody tr td span {
+/* .table-container tbody tr td span {
   margin-top: -24px;
   margin-left: 18px;
   display: block;
-}
+} */
 
-.table-container tbody tr td button {
+.table-container tbody tr td .buttonListProduct {
   width: 30px;
   height: 30px;
   border-radius: 10px;
   color: #757b82;
 }
 
-.table-container tbody tr td button:nth-child(1) {
+.table-container tbody tr td .buttonListProduct:nth-child(1) {
   background-color: #c6ffd2;
   margin-right: 7px;
 }
 
-.table-container tbody tr td button:nth-child(2) {
+.table-container tbody tr td .buttonListProduct:nth-child(2) {
   background-color: #ffd5d5;
 }
 
@@ -208,13 +209,8 @@
 .hethan,
 .chuaapdung {
   color: white !important;
-
-  width: 120px;
-  height: 30px;
-  line-height: 30px;
-  margin-top: 2px !important;
-  margin-left: 25px !important;
-  border-radius: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .conhan {
@@ -226,7 +222,7 @@
 }
 
 .chuaapdung {
-  background-color: #e9b533 !important;
+  background-color: #305579 !important;
 }
 
 .rut {
@@ -294,7 +290,7 @@
 .comment {
   border-bottom: 1px solid #ccc;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
 }
 
@@ -337,12 +333,14 @@
   font-size: 1.7rem;
   margin-left: 95px;
   margin-right: 95px;
+  margin-bottom: 5px;
 }
 
 .faEllipsisVertical {
   font-size: 2rem;
   cursor: pointer;
   color: gray;
+  padding: 5px;
 }
 
 .faEllipsisVertical:hover {
@@ -418,20 +416,20 @@
   color: black;
   cursor: pointer;
   position: absolute;
-  right: 0px;
-  top: 100%;
-  display: none;
+  right: 5px;
+  top: -35px;
+  /* display: none; */
 }
 
-.comment-report_btn::after {
+/* .comment-report_btn::after {
   content: "";
   width: 95px;
   height: 40px;
-  background-color: #ffffff00;
+  background-color: #f13131e7;
   position: absolute;
   top: -40px;
   left: 0;
-}
+} */
 
 .comment-report_btn:hover {
   background-color: #ed4d2d;
@@ -450,7 +448,7 @@
 }
 
 .reply input {
-  width: 597px;
+  width: 80%;
   height: 43px;
   margin-left: 95px;
   margin-right: 95px;
@@ -465,7 +463,7 @@
 
 .reply input:focus {
   border: 2px solid #ed4d2d;
-  margin-left: -3px !important;
+  /* margin-left: -3px !important; */
 }
 
 .reply button {
@@ -515,7 +513,7 @@
 .seller-feedback_content {
   font-size: 1.7rem;
   margin-left: 52px;
-  margin-top: -10px;
+  /* margin-top: -10px; */
 }
 
 .delete-feedback {
@@ -615,14 +613,15 @@
 
 .backtoComment {
   background-color: #5066f66b;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   color: white;
   border-radius: 50%;
   font-size: 20px;
-  margin-top: -14px;
+  margin-top: 0;
   margin-bottom: 10px;
-  padding: 5px 10px 5px 10px;
+  margin-right: 15px;
+  padding: 0px 5px 2px 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -680,4 +679,8 @@
   object-fit: contain;
   margin-left: -20px !important;
   margin-top: 20px !important;
+}
+
+.mt-5{
+  margin-top: -5px;
 }

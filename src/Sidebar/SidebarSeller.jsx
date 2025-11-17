@@ -223,8 +223,8 @@ const SidebarSeller = () => {
           )}
         </li>
 
-        <li>
-          {/* Menu cha */}
+        {/* <li>
+          
           <div
             style={{ marginBottom: "12px", cursor: "pointer" }}
             className={
@@ -242,7 +242,7 @@ const SidebarSeller = () => {
             />
           </div>
 
-          {/* Menu con */}
+          
           {openMenu === "statistical" && (
             <div className="submenu submenu-open bg_white">
               <Link
@@ -285,7 +285,7 @@ const SidebarSeller = () => {
               </Link>
             </div>
           )}
-        </li>
+        </li> */}
 
         <li>
           <Link

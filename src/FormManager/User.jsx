@@ -33,7 +33,7 @@ const User = () => {
         <Route path="donhang" element={<DonHang />} />
         <Route path="sellerRegister" element={<RegisterSeller />} />
         <Route path="wallet" element={<RechargeForm />} />
-        <Route path="HomeUserIndex" element={<HomeUserIndex />} />
+        <Route path="booker.vn" element={<HomeUserIndex />} />
         <Route path="PageSeller/:id_cua_hang" element={<StorePage />} />
         <Route path="forgot-password" element={<ResetPassword />} />
         <Route path="use-voucher-page/code/:idVoucher" element={<UseVoucherPage />} />

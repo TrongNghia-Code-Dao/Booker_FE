@@ -11,6 +11,7 @@ import { CartProvider } from "./context/cartContext";
 import BuyerChat from "./chat/BuyerChat";
 import SellerChat from "./chat/SellerChat";
 import ScrollToTop from "./ScrollToTop";
+import { NotificationContainer } from "react-notifications";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/seller-chat" element={<SellerChat />} />
         </Routes>
       </div>
+      <NotificationContainer />
     </CartProvider>
   );
 }

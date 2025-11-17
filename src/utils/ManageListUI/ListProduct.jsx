@@ -24,7 +24,7 @@ import {
 
 import { deleteBook } from "../../utils/API/ProductAPI";
 
-const ListProduct = ({ listBooks = [], keySearch, searchName }) => {
+const ListProduct = ({ listBooks = [], keySearch, searchName, onReload }) => {
   // * Mảng các Sản phẩm
   const [productList, setProductList] = useState([]);
   // * Phân trang
@@ -169,7 +169,7 @@ const ListProduct = ({ listBooks = [], keySearch, searchName }) => {
       const isDeleted = await handleDelete();
       if (isDeleted) {
         NotificationManager.success("Thành công", "Xóa sách");
-        window.location.reload();
+        onReload();
       } else {
         NotificationManager.error("Thất bại", "Xóa sách");
       }
@@ -251,6 +251,7 @@ const ListProduct = ({ listBooks = [], keySearch, searchName }) => {
 
       <td style={{ width: "5%", textAlign: "center" }}>
         <button
+          className="buttonListProduct"
           type="button"
           onClick={(e) => {
             e.stopPropagation();
@@ -265,6 +266,7 @@ const ListProduct = ({ listBooks = [], keySearch, searchName }) => {
         </button>
         {book.da_ban <= 0 && (
           <button
+            className="buttonListProduct"
             onClick={(e) => {
               e.stopPropagation();
               handleShowDelBook(book.ten_san_pham, book.ma_san_pham);
@@ -294,6 +296,7 @@ const ListProduct = ({ listBooks = [], keySearch, searchName }) => {
   // }, [productCount]);
 
   // *Tổng số trang (số lượng sản phẩm / 10)
+
   useEffect(() => {
     const totalProducts = listBooks.length;
     setProductList(listBooks);
@@ -437,6 +440,7 @@ const ListProduct = ({ listBooks = [], keySearch, searchName }) => {
             bookID={selectedBook}
             statusText={status}
             statusInt={statusInt}
+            onReload={onReload}
           />
         )
       }

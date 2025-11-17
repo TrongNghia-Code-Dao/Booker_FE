@@ -214,7 +214,7 @@ const ProductDetail = () => {
       const storedUser = JSON.parse(sessionStorage.getItem("user"));
       if (storedUser) {
         setUser(storedUser);
-        console.log(storedUser.id_tai_khoan)
+        console.log("id tài khoản người dùng là: ", storedUser.id_tai_khoan);
       }
     };
 
@@ -622,18 +622,14 @@ const ProductDetail = () => {
                   ></FontAwesomeIcon>
                   Thêm vào giỏ hàng
                 </button>
-                {user === null && (
-                  <button onClick={buyNow} className="buy-now-btn">
-                    MUA NGAY
-                  </button>
-                )}
-                {user?.trang_thai_tk === false && (
+
+                {product.con_hang > 0 && user && user.trang_thai_tk === false && (
                   <button onClick={buyNow} className="buy-now-btn">
                     MUA NGAY
                   </button>
                 )}
               </div>
-            </div>
+            </div> 
 
             <div className="product-share">
               <p>Chia sẻ:</p>
@@ -914,7 +910,11 @@ const ProductDetail = () => {
       </section>
 
       {formChat === true && (
-        <ChatFormUser storeID={stroID} userID={1} onClose={handleChatClose} />
+        <ChatFormUser
+          storeID={stroID}
+          userID={user.id_tai_khoan}
+          onClose={handleChatClose}
+        />
       )}
 
       <NotificationContainer />

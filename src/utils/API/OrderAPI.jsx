@@ -25,3 +25,25 @@ export const getAllDonHang = () => {
             throw error;
         });
 };
+
+export const countDistinctTaiKhoanDaMua = () => {
+    return axios.get(`${hostOrder}/admin/count-distinct-tai-khoan-da-mua`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.error("Error fetching all orders:", error);
+            throw error;
+        });
+};
+
+export const countAllDonHang = () => {
+    return axios.get(`${hostOrder}/admin/count-all-don-hang`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.error("Error fetching all orders:", error);
+            throw error;
+        });
+};
